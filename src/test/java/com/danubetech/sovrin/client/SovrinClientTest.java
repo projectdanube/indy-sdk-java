@@ -12,7 +12,7 @@ public class SovrinClientTest extends TestCase {
 	protected void setUp() throws Exception {
 
 		NativeSovrinClient.init(new File("./l/libsovclient.so"));
-		
+
 		client = new SovrinClientImpl("localhost:1234");
 	}
 
@@ -24,7 +24,7 @@ public class SovrinClientTest extends TestCase {
 
 	public void testSetDid() {
 
-		int result = client.setDid("dest", "verKey", "xref", "data", "role");
+		int result = client.setDid("did:sov:21tDAKCERh95uGgKbJNHYp", "lji9qTtkCydxtez/bt1zdLxVMMbz4SzWvlqgOBmURoM=", null, null, "USER");
 		assertEquals(result, 0);
 	}
 }
