@@ -2,7 +2,7 @@
 
 ## Sovrin Client (Java)
 
-This is a **work-in-progress** Java client library for [Sovrin](https://github.com/sovrin-foundation/sovrin-client/). It is implemented using a foreign function interface (FFI) to a native library written in Rust.
+This is a **work-in-progress** Java client library for [Sovrin](https://sovrin.org/). It is implemented using a foreign function interface (FFI) to a native library written in Rust.
 
 Pull requests welcome!
 
