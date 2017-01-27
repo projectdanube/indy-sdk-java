@@ -11,7 +11,7 @@ public class SovrinClientTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 
-		NativeSovrinClient.init(new File("./l/libsovclient.so"));
+		NativeSovrinClient.init(new File("./lib/libsovclient.so"));
 
 		client = new SovrinClientImpl("localhost:1234");
 	}
