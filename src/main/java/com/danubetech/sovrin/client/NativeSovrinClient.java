@@ -5,6 +5,7 @@ import static java.lang.System.mapLibraryName;
 import java.io.File;
 
 import jnr.ffi.LibraryLoader;
+import jnr.ffi.Pointer;
 
 public abstract class NativeSovrinClient {
 
@@ -13,15 +14,17 @@ public abstract class NativeSovrinClient {
 	public interface Client {
 
 		public int init_client(String hostAndPort);
-		public int release_client(int clientId);
-		public int set_did(int clientId, String dest, String verKey, String xref, String data, String role);
-		public void get_did(int clientId, String did);
-		public void set_attr(int clientId, String dest, String hash, String raw, String enc);
-		public void get_attr(int clientId);
-		public void set_schema(int clientId);
-		public void get_schema(int clientId);
-		public void set_issuer_key(int clientId);
-		public void get_issuer_key(int clientId);
+		public int release_client(int client_id);
+		public int set_did(int client_id, String did, String verkey, String xref, String data, String role);
+		public Pointer get_verkey(int client_id, String did);
+		public Pointer get_ddo(int client_id, String did);
+		public void free_str(Pointer c_ptr);
+		public int set_attr(int client_id, String did, byte[] hash, byte[] raw, byte[] enc);
+		public Pointer get_attr(int client_id, String did, String attr_name);
+		public int set_schema(int client_id, String schema);
+		public Pointer get_schema(int client_id);
+		public int set_issuer_key(int client_id, byte[] issuer_key);
+		public Pointer get_issuer_key(int client_id);
 	}
 
 	public static Client client;
