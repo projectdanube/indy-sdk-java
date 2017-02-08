@@ -30,8 +30,8 @@ Then run
 	
 			try {
 	
-				int result = client.setDid("did:sov:21tDAKCERh95uGgKbJNHYp", "lji9qTtkCydxtez/bt1zdLxVMMbz4SzWvlqgOBmURoM=", null, null, "USER");
-				System.out.println("setDid result: " + result);
+				int result = client.setDID("did:sov:21tDAKCERh95uGgKbJNHYp", "lji9qTtkCydxtez/bt1zdLxVMMbz4SzWvlqgOBmURoM=", null, null, "USER");
+				System.out.println("setDID result: " + result);
 			} finally {
 	
 				client.close();
