@@ -46,8 +46,8 @@ public class SovrinClientImpl implements SovrinClient {
 		Pointer result = NativeSovrinClient.client.get_verkey(
 				this.clientId, 
 				did);
-		String string = result.getString(0);
-		NativeSovrinClient.client.free_str(result);
+		String string = result == null ? null : result.getString(0);
+		if (result != null) NativeSovrinClient.client.free_str(result);
 
 		return string;
 	}
@@ -58,8 +58,8 @@ public class SovrinClientImpl implements SovrinClient {
 		Pointer result = NativeSovrinClient.client.get_ddo(
 				this.clientId, 
 				did);
-		String string = result.getString(0);
-		NativeSovrinClient.client.free_str(result);
+		String string = result == null ? null : result.getString(0);
+		if (result != null) NativeSovrinClient.client.free_str(result);
 
 		return string;
 	}
@@ -84,8 +84,8 @@ public class SovrinClientImpl implements SovrinClient {
 				this.clientId, 
 				did, 
 				attrName);
-		String string = result.getString(0);
-		NativeSovrinClient.client.free_str(result);
+		String string = result == null ? null : result.getString(0);
+		if (result != null) NativeSovrinClient.client.free_str(result);
 
 		return string;
 	}
@@ -105,8 +105,8 @@ public class SovrinClientImpl implements SovrinClient {
 
 		Pointer result = NativeSovrinClient.client.get_schema(
 				this.clientId);
-		String string = result.getString(0);
-		NativeSovrinClient.client.free_str(result);
+		String string = result == null ? null : result.getString(0);
+		if (result != null) NativeSovrinClient.client.free_str(result);
 
 		return string;
 	}
@@ -126,8 +126,8 @@ public class SovrinClientImpl implements SovrinClient {
 
 		Pointer result = NativeSovrinClient.client.get_issuer_key(
 				this.clientId);
-		String string = result.getString(0);
-		NativeSovrinClient.client.free_str(result);
+		String string = result == null ? null : result.getString(0);
+		if (result != null) NativeSovrinClient.client.free_str(result);
 
 		return string;
 	}
