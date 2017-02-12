@@ -1,7 +1,5 @@
 package com.danubetech.sovrin.client;
 
-import java.io.File;
-
 import junit.framework.TestCase;
 
 public class SovrinClientTest extends TestCase {
@@ -11,7 +9,7 @@ public class SovrinClientTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 
-		NativeSovrinClient.init(new File("./lib/libsovclient.so"));
+		NativeSovrinClient.init();
 
 		client = new SovrinClientImpl("localhost:1234");
 	}

@@ -1,7 +1,5 @@
 package com.danubetech.sovrin.client;
 
-import static java.lang.System.mapLibraryName;
-
 import java.io.File;
 
 import jnr.ffi.LibraryLoader;
@@ -41,8 +39,8 @@ public abstract class NativeSovrinClient {
 
 	public static void init() {
 
-		File sovclient = new File("./lib/" + mapLibraryName(LIBRARY_NAME));
-
-		init(sovclient);
+		client = LibraryLoader.create(Client.class)
+                .search("lib")
+                .load(LIBRARY_NAME);
 	}
 }
