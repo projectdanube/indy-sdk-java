@@ -28,14 +28,14 @@ public class PoolTest extends TestCase {
 
 	public void testCreatePoolLedgerConfig() throws Exception {
 
-		Future<CreatePoolLedgerConfigResult> future = pool.createPoolLedgerConfig("default", "testconfig");
+		Future<CreatePoolLedgerConfigResult> future = pool.createPoolLedgerConfig("myconfig", null);
 		CreatePoolLedgerConfigResult result = future.get();
 		assertNotNull(result);
 	}
 
 	public void testOpenPoolLedger() throws Exception {
 
-		Future<OpenPoolLedgerResult> future = pool.openPoolLedger("default", "testconfig");
+		Future<OpenPoolLedgerResult> future = pool.openPoolLedger("myconfig", null);
 		OpenPoolLedgerResult result = future.get();
 		assertNotNull(result);
 	}
