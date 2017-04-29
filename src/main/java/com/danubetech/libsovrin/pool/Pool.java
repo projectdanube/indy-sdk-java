@@ -2,17 +2,22 @@ package com.danubetech.libsovrin.pool;
 
 import java.util.concurrent.Future;
 
+import com.danubetech.libsovrin.SovrinJsonOptions;
 import com.danubetech.libsovrin.SovrinException;
 
 public interface Pool {
 
+	/*
+	 * Methods
+	 */
+
 	public Future<CreatePoolLedgerConfigResult> createPoolLedgerConfig(
 			String configName,
-			String config) throws SovrinException;
+			CreatePoolLedgerConfigOptions config) throws SovrinException;
 
 	public Future<OpenPoolLedgerResult> openPoolLedger(
 			String configName,
-			String config) throws SovrinException;
+			OpenPoolLedgerConfigOptions config) throws SovrinException;
 
 	public Future<RefreshPoolLedgerResult> refreshPoolLedger(
 			int handle) throws SovrinException;
@@ -22,6 +27,60 @@ public interface Pool {
 
 	public Future<DeletePoolLedgerConfigResult> deletePoolLedgerConfig(
 			String configName) throws SovrinException;
+
+	/*
+	 * Options
+	 */
+
+	public static class CreatePoolLedgerConfigOptions extends SovrinJsonOptions {
+
+		private String genesisTxn;
+
+		public CreatePoolLedgerConfigOptions(String genesisTxn) {
+
+			this.genesisTxn = genesisTxn;
+		}
+
+		public String toJson() {
+
+			StringBuilder builder = new StringBuilder();
+			builder.append("{");
+			builder.append("\"genesis_txn\":\"" + escapeJson(this.genesisTxn) + "\"");
+			builder.append("}");
+			return builder.toString();
+		}
+	}
+
+	public static class OpenPoolLedgerConfigOptions extends SovrinJsonOptions {
+
+		private boolean refreshOnOpen;
+		private boolean autoRefreshTime;
+		private int networkTimeout;
+
+		public OpenPoolLedgerConfigOptions(boolean refreshOnOpen, boolean autoRefreshTime, int networkTimeout) {
+
+			this.refreshOnOpen = refreshOnOpen;
+			this.autoRefreshTime = autoRefreshTime;
+			this.networkTimeout = networkTimeout;
+		}
+
+		public String toJson() {
+
+			StringBuilder builder = new StringBuilder();
+			builder.append("{");
+			builder.append("\"refreshOnOpen\":\"" + Boolean.toString(this.refreshOnOpen) + "\"");
+			builder.append(",");
+			builder.append("\"autoRefreshTime\":\"" + Boolean.toString(this.autoRefreshTime) + "\"");
+			builder.append(",");
+			builder.append("\"networkTimeout\":\"" + Integer.toString(this.networkTimeout) + "\"");
+			builder.append("}");
+			return builder.toString();
+		}
+	}
+
+	/*
+	 * Results
+	 */
 
 	public static class CreatePoolLedgerConfigResult {
 

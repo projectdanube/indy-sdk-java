@@ -5,9 +5,10 @@ import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
+import com.danubetech.libsovrin.SovrinModule;
 import com.sun.jna.Callback;
 
-public class PoolImpl extends LibSovrin.SovrinModule implements Pool {
+public class PoolImpl extends SovrinModule implements Pool {
 
 	public PoolImpl() {
 
@@ -15,7 +16,7 @@ public class PoolImpl extends LibSovrin.SovrinModule implements Pool {
 
 	public Future<CreatePoolLedgerConfigResult> createPoolLedgerConfig(
 			String configName,
-			String config) throws SovrinException {
+			CreatePoolLedgerConfigOptions config) throws SovrinException {
 
 		final CompletableFuture<CreatePoolLedgerConfigResult> future = new CompletableFuture<> ();
 
@@ -34,7 +35,7 @@ public class PoolImpl extends LibSovrin.SovrinModule implements Pool {
 		int result = LibSovrin.api.sovrin_create_pool_ledger_config(
 				FIXED_COMMAND_HANDLE, 
 				configName, 
-				config, 
+				config == null ? null : config.toJson(), 
 				callback);
 
 		checkResult(result);
@@ -44,7 +45,7 @@ public class PoolImpl extends LibSovrin.SovrinModule implements Pool {
 
 	public Future<OpenPoolLedgerResult> openPoolLedger(
 			String configName,
-			String config) throws SovrinException {
+			OpenPoolLedgerConfigOptions config) throws SovrinException {
 
 		final CompletableFuture<OpenPoolLedgerResult> future = new CompletableFuture<> ();
 
@@ -63,7 +64,7 @@ public class PoolImpl extends LibSovrin.SovrinModule implements Pool {
 		int result = LibSovrin.api.sovrin_create_pool_ledger_config(
 				FIXED_COMMAND_HANDLE, 
 				configName, 
-				config, 
+				config == null ? null : config.toJson(), 
 				callback);
 
 		checkResult(result);

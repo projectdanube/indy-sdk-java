@@ -6,6 +6,10 @@ import com.danubetech.libsovrin.SovrinException;
 
 public interface Wallet {
 
+	/*
+	 * Methods
+	 */
+	
 /* IMPLEMENT LATER
  * public Future<...> registerWalletType(
 			...) throws SovrinException;*/
@@ -34,6 +38,10 @@ public interface Wallet {
 			String walletKey,
 			String configName) throws SovrinException;
 
+	/*
+	 * Results
+	 */
+	
 	public static class CreateWalletResult {
 
 		CreateWalletResult() { }

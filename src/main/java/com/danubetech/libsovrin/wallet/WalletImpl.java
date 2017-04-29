@@ -5,9 +5,10 @@ import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
+import com.danubetech.libsovrin.SovrinModule;
 import com.sun.jna.Callback;
 
-public class WalletImpl extends LibSovrin.SovrinModule implements Wallet {
+public class WalletImpl extends SovrinModule implements Wallet {
 
 	public WalletImpl() {
 
