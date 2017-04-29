@@ -1,9 +1,11 @@
-package com.danubetech.libsovrin.pool;
+package com.danubetech.libsovrin;
 
 import java.io.File;
 import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
+import com.danubetech.libsovrin.pool.Pool;
+import com.danubetech.libsovrin.pool.PoolImpl;
 import com.danubetech.libsovrin.pool.Pool.CreatePoolLedgerConfigResult;
 import com.danubetech.libsovrin.pool.Pool.OpenPoolLedgerResult;
 

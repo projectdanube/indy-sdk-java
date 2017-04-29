@@ -1,4 +1,4 @@
-package com.danubetech.libsovrin.pool;
+package com.danubetech.libsovrin;
 
 import java.io.File;
 import java.util.concurrent.Future;
