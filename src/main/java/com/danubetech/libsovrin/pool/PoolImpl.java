@@ -6,8 +6,7 @@ import java.util.concurrent.Future;
 import com.danubetech.libsovrin.ErrorCode;
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
-
-import jnr.ffi.Address;
+import com.sun.jna.Callback;
 
 public class PoolImpl implements Pool {
 
@@ -21,8 +20,9 @@ public class PoolImpl implements Pool {
 
 		final CompletableFuture<CreatePoolLedgerConfigResult> future = new CompletableFuture<> ();
 
-		LibSovrin.sovrin_create_pool_ledger_config_Closure closure = new LibSovrin.sovrin_create_pool_ledger_config_Closure() {
+		Callback callback = new Callback() {
 
+			@SuppressWarnings("unused")
 			public void invoke(int xcommand_handle, int err) {
 
 				ErrorCode errorCode = ErrorCode.valueOf(err);
@@ -37,7 +37,7 @@ public class PoolImpl implements Pool {
 				0, 
 				configName, 
 				config, 
-				Address.valueOf(closure.handle().getAddress()));
+				callback);
 
 		ErrorCode errorCode = ErrorCode.valueOf(result);
 		if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
@@ -51,8 +51,9 @@ public class PoolImpl implements Pool {
 
 		final CompletableFuture<OpenPoolLedgerResult> future = new CompletableFuture<> ();
 
-		LibSovrin.sovrin_open_pool_ledger_Closure closure = new LibSovrin.sovrin_open_pool_ledger_Closure() {
+		Callback callback = new Callback() {
 
+			@SuppressWarnings("unused")
 			public void invoke(int xcommand_handle, int err, int pool_handle) {
 
 				ErrorCode errorCode = ErrorCode.valueOf(err);
@@ -67,7 +68,7 @@ public class PoolImpl implements Pool {
 				0, 
 				configName, 
 				config, 
-				closure.address());
+				callback);
 
 		ErrorCode errorCode = ErrorCode.valueOf(result);
 		if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
@@ -80,9 +81,10 @@ public class PoolImpl implements Pool {
 
 		final CompletableFuture<RefreshPoolLedgerResult> future = new CompletableFuture<> ();
 
-		LibSovrin.sovrin_refresh_pool_ledger_Closure closure = new LibSovrin.sovrin_refresh_pool_ledger_Closure() {
+		Callback callback = new Callback() {
 
-			public void invoke(int xcommand_handle, int err) {
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err) {
 
 				ErrorCode errorCode = ErrorCode.valueOf(err);
 				if (! ErrorCode.Success.equals(errorCode)) { future.completeExceptionally(SovrinException.fromErrorCode(errorCode)); return; }
@@ -95,7 +97,7 @@ public class PoolImpl implements Pool {
 		int result = LibSovrin.api.sovrin_refresh_pool_ledger(
 				0, 
 				handle, 
-				closure.address());
+				callback);
 
 		ErrorCode errorCode = ErrorCode.valueOf(result);
 		if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
@@ -108,8 +110,9 @@ public class PoolImpl implements Pool {
 
 		final CompletableFuture<ClosePoolLedgerResult> future = new CompletableFuture<> ();
 
-		LibSovrin.sovrin_close_pool_ledger_Closure closure = new LibSovrin.sovrin_close_pool_ledger_Closure() {
+		Callback callback = new Callback() {
 
+			@SuppressWarnings("unused")
 			public void invoke(int xcommand_handle, int err) {
 
 				ErrorCode errorCode = ErrorCode.valueOf(err);
@@ -123,7 +126,7 @@ public class PoolImpl implements Pool {
 		int result = LibSovrin.api.sovrin_refresh_pool_ledger(
 				0, 
 				handle, 
-				closure.address());
+				callback);
 
 		ErrorCode errorCode = ErrorCode.valueOf(result);
 		if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
@@ -136,8 +139,9 @@ public class PoolImpl implements Pool {
 
 		final CompletableFuture<DeletePoolLedgerConfigResult> future = new CompletableFuture<> ();
 
-		LibSovrin.sovrin_delete_pool_ledger_config_Closure closure = new LibSovrin.sovrin_delete_pool_ledger_config_Closure() {
+		Callback callback = new Callback() {
 
+			@SuppressWarnings("unused")
 			public void invoke(int xcommand_handle, int err) {
 
 				ErrorCode errorCode = ErrorCode.valueOf(err);
@@ -151,7 +155,7 @@ public class PoolImpl implements Pool {
 		int result = LibSovrin.api.sovrin_delete_pool_ledger_config(
 				0, 
 				configName, 
-				closure.address());
+				callback);
 
 		ErrorCode errorCode = ErrorCode.valueOf(result);
 		if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);

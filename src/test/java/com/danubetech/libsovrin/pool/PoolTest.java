@@ -3,10 +3,8 @@ package com.danubetech.libsovrin.pool;
 import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
-import com.danubetech.libsovrin.pool.Pool;
 import com.danubetech.libsovrin.pool.Pool.CreatePoolLedgerConfigResult;
 import com.danubetech.libsovrin.pool.Pool.OpenPoolLedgerResult;
-import com.danubetech.libsovrin.pool.PoolImpl;
 
 import junit.framework.TestCase;
 
