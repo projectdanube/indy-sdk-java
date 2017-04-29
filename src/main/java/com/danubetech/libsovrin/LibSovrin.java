@@ -1,7 +1,6 @@
 package com.danubetech.libsovrin;
 
 import java.io.File;
-import java.util.concurrent.CompletableFuture;
 
 import com.sun.jna.Callback;
 import com.sun.jna.Library;
@@ -47,31 +46,6 @@ public abstract class LibSovrin {
 		public int build_claim_def_txn(int command_handle, String submitter_did, String xref, String data, Callback cb);
 		public int build_get_claim_def_txn(int command_handle, String submitter_did, String xref, Callback cb);
 		public int build_node_request(int command_handle, String submitter_did, String target_did, String data, Callback cb);
-	}
-
-	/*
-	 * Sovrin modules (i.e. pool.rs, wallet.rs, ...)
-	 */
-
-	public static abstract class SovrinModule {
-
-		public static final int FIXED_COMMAND_HANDLE = 0;
-
-		protected boolean checkCallback(CompletableFuture<?> future, int xcommand_handle, int err) {
-
-			assert(xcommand_handle == FIXED_COMMAND_HANDLE);
-
-			ErrorCode errorCode = ErrorCode.valueOf(err);
-			if (! ErrorCode.Success.equals(errorCode)) { future.completeExceptionally(SovrinException.fromErrorCode(errorCode)); return false; }
-
-			return true;
-		}
-
-		protected void checkResult(int result) throws SovrinException {
-
-			ErrorCode errorCode = ErrorCode.valueOf(result);
-			if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
-		}
 	}
 
 	/*
