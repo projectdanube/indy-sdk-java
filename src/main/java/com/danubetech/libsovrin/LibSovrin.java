@@ -41,32 +41,33 @@ public abstract class LibSovrin {
 
 	}
 
-	public static API api = null;
-
 	/*
 	 * Initialization
 	 */
 
+	public static API api = null;
+
 	static {
 
-		init();
+		try {
+
+			init();
+
+		} catch (UnsatisfiedLinkError ex) {
+
+			// Library could not be found in standard OS locations.
+			// Call init(File file) explicitly with absolute library path.
+		}
 	}
 
 	public static void init(File file) {
 
-		System.setProperty("jna.library.path", file.getAbsolutePath());
-		api = Native.loadLibrary(LIBRARY_NAME, API.class);
-//		api = LibraryLoader.create(API.class).load(file.getAbsolutePath());
+		api = Native.loadLibrary(file.getAbsolutePath(), API.class);
 	}
 
 	public static void init() {
 
-		System.setProperty("jna.library.path", "./lib/");
 		api = Native.loadLibrary(LIBRARY_NAME, API.class);
-
-/*		api = LibraryLoader.create(API.class)
-				.search("lib")
-				.load(LIBRARY_NAME);*/
 	}
 
 	public static boolean isInitialized() {

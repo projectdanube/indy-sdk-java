@@ -1,5 +1,6 @@
 package com.danubetech.libsovrin.pool;
 
+import java.io.File;
 import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
@@ -15,7 +16,7 @@ public class PoolTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 
-		LibSovrin.init();
+		if (! LibSovrin.isInitialized()) LibSovrin.init(new File("./lib/libsovrin.so"));
 
 		pool = new PoolImpl();
 	}
