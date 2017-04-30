@@ -3,6 +3,8 @@ package com.danubetech.libsovrin;
 import java.io.File;
 import java.util.concurrent.Future;
 
+import org.junit.Assert;
+
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.wallet.Wallet;
 import com.danubetech.libsovrin.wallet.Wallet.CloseWalletResult;
@@ -15,14 +17,12 @@ import junit.framework.TestCase;
 
 public class WalletTest extends TestCase {
 
-	private Wallet wallet;
+	private static Wallet wallet = new WalletImpl();
 
 	@Override
 	protected void setUp() throws Exception {
 
 		if (! LibSovrin.isInitialized()) LibSovrin.init(new File("./lib/libsovrin.so"));
-
-		wallet = new WalletImpl();
 	}
 
 	@Override
@@ -32,21 +32,21 @@ public class WalletTest extends TestCase {
 
 	public void testWallet() throws Exception {
 
-		Future<CreateWalletResult> future1 = wallet.createWallet("default", "mywallet4", null, null, null);
+		Future<CreateWalletResult> future1 = wallet.createWallet("default", "mywallet", null, null, null);
 		CreateWalletResult result1 = future1.get();
-		assertNotNull(result1);
+		Assert.assertNotNull(result1);
 
-		Future<OpenWalletResult> future2 = wallet.openWallet(0, "mywallet4", null, null);
+		Future<OpenWalletResult> future2 = wallet.openWallet(0, "mywallet", null, null);
 		OpenWalletResult result2 = future2.get();
-		assertNotNull(result2);
+		Assert.assertNotNull(result2);
 		int handle = result2.getHandle();
 
 		Future<CloseWalletResult> future3 = wallet.closeWallet(handle);
 		CloseWalletResult result3 = future3.get();
-		assertNotNull(result3);
+		Assert.assertNotNull(result3);
 
-		Future<DeleteWalletResult> future4 = wallet.deleteWallet("mywallet4");
+		Future<DeleteWalletResult> future4 = wallet.deleteWallet("mywallet");
 		DeleteWalletResult result4 = future4.get();
-		assertNotNull(result4);
+		Assert.assertNotNull(result4);
 	}
 }
