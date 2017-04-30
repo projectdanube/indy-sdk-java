@@ -140,4 +140,99 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 
 		return future;
 	}
+
+	public Future<BuildAttribRequestResult> buildAttribRequest(
+			String submitterDid,
+			String targetDid,
+			String hash,
+			String raw,
+			String enc) throws SovrinException {
+
+		final CompletableFuture<BuildAttribRequestResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildAttribRequestResult result = new BuildAttribRequestResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_attrib_request(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				targetDid,
+				hash,
+				raw,
+				enc,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public Future<BuildGetAttribRequestResult> buildGetAttribRequest(
+			String submitterDid,
+			String targetDid,
+			String data) throws SovrinException {
+
+		final CompletableFuture<BuildGetAttribRequestResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildGetAttribRequestResult result = new BuildGetAttribRequestResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_get_attrib_request(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				targetDid,
+				data,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public Future<BuildGetNymRequestResult> buildGetNymRequest(
+			String submitterDid,
+			String targetDid) throws SovrinException {
+
+		final CompletableFuture<BuildGetNymRequestResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildGetNymRequestResult result = new BuildGetNymRequestResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_get_nym_request(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				targetDid,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
 }

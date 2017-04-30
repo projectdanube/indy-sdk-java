@@ -37,15 +37,14 @@ public interface Ledger {
 			String targetDid,
 			String hash,
 			String raw,
-			String enc,
-			String role) throws SovrinException;
+			String enc) throws SovrinException;
 
 	public Future<BuildGetAttribRequestResult> buildGetAttribRequest(
 			String submitterDid,
 			String targetDid,
 			String data) throws SovrinException;
 
-	public Future<BuildGetNymRequestResult> buildGetAttribRequest(
+	public Future<BuildGetNymRequestResult> buildGetNymRequest(
 			String submitterDid,
 			String targetDid) throws SovrinException;
 
