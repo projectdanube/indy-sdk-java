@@ -73,4 +73,71 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 
 		return future;
 	}
+
+	public Future<BuildGetDdoRequestResult> buildGetDdoRequest(
+			String submitterDid,
+			String targetDid,
+			String requestJson) throws SovrinException {
+
+		final CompletableFuture<BuildGetDdoRequestResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildGetDdoRequestResult result = new BuildGetDdoRequestResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_get_ddo_request(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				targetDid,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public Future<BuildNymRequestResult> buildNymRequest(
+			String submitterDid,
+			String targetDid,
+			String verkey,
+			String xref,
+			String data,
+			String role) throws SovrinException {
+
+		final CompletableFuture<BuildNymRequestResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildNymRequestResult result = new BuildNymRequestResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_nym_request(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				targetDid,
+				verkey,
+				xref,
+				data,
+				role,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
 }
