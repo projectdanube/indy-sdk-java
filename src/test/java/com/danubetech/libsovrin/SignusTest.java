@@ -26,7 +26,7 @@ public class SignusTest extends TestCase {
 
 		if (! LibSovrin.isInitialized()) LibSovrin.init(new File("./lib/libsovrin.so"));
 
-		wallet.createWallet("default", "mywallet", null, null, null).get();
+//		wallet.createWallet("default", "mywallet", null, null, null).get();
 		this.handle = wallet.openWallet(0, "mywallet", null, null).get().getHandle();
 	}
 
