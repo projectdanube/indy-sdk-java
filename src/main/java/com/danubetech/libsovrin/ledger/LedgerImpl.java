@@ -242,4 +242,158 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 
 		return future;
 	}
+
+	@Override
+	public Future<BuildSchemaRequestResult> buildSchemaRequest(
+			String submitterDid,
+			String data) throws SovrinException {
+
+		final CompletableFuture<BuildSchemaRequestResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildSchemaRequestResult result = new BuildSchemaRequestResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_schema_request(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				data,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	@Override
+	public Future<BuildGetSchemaRequestResult> buildGetSchemaRequest(
+			String submitterDid,
+			String data) throws SovrinException {
+
+		final CompletableFuture<BuildGetSchemaRequestResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildGetSchemaRequestResult result = new BuildGetSchemaRequestResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_get_schema_request(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				data,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	@Override
+	public Future<BuildClaimDefTxnResult> buildClaimDefTxn(
+			String submitterDid,
+			String xref,
+			String data) throws SovrinException {
+
+		final CompletableFuture<BuildClaimDefTxnResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildClaimDefTxnResult result = new BuildClaimDefTxnResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_claim_def_txn(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				xref,
+				data,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	@Override
+	public Future<BuildGetClaimDefTxnResult> buildGetClaimDefTxn(
+			String submitterDid,
+			String xref) throws SovrinException {
+
+		final CompletableFuture<BuildGetClaimDefTxnResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildGetClaimDefTxnResult result = new BuildGetClaimDefTxnResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_get_claim_def_txn(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				xref,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	@Override
+	public Future<BuildNodeRequestResult> buildNodeRequest(
+			String submitterDid,
+			String targetDid,
+			String data) throws SovrinException {
+
+		final CompletableFuture<BuildNodeRequestResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String request_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				BuildNodeRequestResult result = new BuildNodeRequestResult(request_json);
+				future.complete(result);
+			}
+		};
+
+		int result = LibSovrin.api.build_node_request(
+				FIXED_COMMAND_HANDLE, 
+				submitterDid,
+				targetDid,
+				data,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
 }
