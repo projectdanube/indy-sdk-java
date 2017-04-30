@@ -34,47 +34,19 @@ public interface Pool {
 
 	public static class CreatePoolLedgerConfigOptions extends SovrinJsonOptions {
 
-		private String genesisTxn;
-
 		public CreatePoolLedgerConfigOptions(String genesisTxn) {
 
-			this.genesisTxn = genesisTxn;
-		}
-
-		public String toJson() {
-
-			StringBuilder builder = new StringBuilder();
-			builder.append("{");
-			builder.append("\"genesis_txn\":\"" + escapeJson(this.genesisTxn) + "\"");
-			builder.append("}");
-			return builder.toString();
+			if (genesisTxn != null) this.map.put("genesis_txn", genesisTxn);
 		}
 	}
 
 	public static class OpenPoolLedgerOptions extends SovrinJsonOptions {
 
-		private boolean refreshOnOpen;
-		private boolean autoRefreshTime;
-		private int networkTimeout;
+		public OpenPoolLedgerOptions(Boolean refreshOnOpen, Boolean autoRefreshTime, Integer networkTimeout) {
 
-		public OpenPoolLedgerOptions(boolean refreshOnOpen, boolean autoRefreshTime, int networkTimeout) {
-
-			this.refreshOnOpen = refreshOnOpen;
-			this.autoRefreshTime = autoRefreshTime;
-			this.networkTimeout = networkTimeout;
-		}
-
-		public String toJson() {
-
-			StringBuilder builder = new StringBuilder();
-			builder.append("{");
-			builder.append("\"refreshOnOpen\":\"" + Boolean.toString(this.refreshOnOpen) + "\"");
-			builder.append(",");
-			builder.append("\"autoRefreshTime\":\"" + Boolean.toString(this.autoRefreshTime) + "\"");
-			builder.append(",");
-			builder.append("\"networkTimeout\":\"" + Integer.toString(this.networkTimeout) + "\"");
-			builder.append("}");
-			return builder.toString();
+			if (refreshOnOpen != null) this.map.put("refreshOnOpen", refreshOnOpen);
+			if (autoRefreshTime != null) this.map.put("autoRefreshTime", autoRefreshTime);
+			if (networkTimeout != null) this.map.put("networkTimeout", networkTimeout);
 		}
 	}
 
