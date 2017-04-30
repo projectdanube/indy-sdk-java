@@ -18,6 +18,7 @@ public class WalletImpl extends SovrinModule implements Wallet {
 	 * public Future<...> registerWalletType(
 				...) throws SovrinException;*/
 
+	@Override
 	public Future<CreateWalletResult> createWallet(
 			String poolName,
 			String name,
@@ -53,6 +54,7 @@ public class WalletImpl extends SovrinModule implements Wallet {
 		return future;
 	}
 
+	@Override
 	public Future<OpenWalletResult> openWallet(
 			int poolHandle,
 			String name,

@@ -14,6 +14,7 @@ public class PoolImpl extends SovrinModule implements Pool {
 
 	}
 
+	@Override
 	public Future<CreatePoolLedgerConfigResult> createPoolLedgerConfig(
 			String configName,
 			CreatePoolLedgerConfigOptions config) throws SovrinException {
@@ -43,6 +44,7 @@ public class PoolImpl extends SovrinModule implements Pool {
 		return future;
 	}
 
+	@Override
 	public Future<OpenPoolLedgerResult> openPoolLedger(
 			String configName,
 			OpenPoolLedgerConfigOptions config) throws SovrinException {
@@ -72,6 +74,7 @@ public class PoolImpl extends SovrinModule implements Pool {
 		return future;
 	}
 
+	@Override
 	public Future<RefreshPoolLedgerResult> refreshPoolLedger(
 			int handle) throws SovrinException {
 
@@ -99,6 +102,7 @@ public class PoolImpl extends SovrinModule implements Pool {
 		return future;
 	}
 
+	@Override
 	public Future<ClosePoolLedgerResult> closePoolLedger(
 			int handle) throws SovrinException {
 
@@ -126,6 +130,7 @@ public class PoolImpl extends SovrinModule implements Pool {
 		return future;
 	}
 
+	@Override
 	public Future<DeletePoolLedgerConfigResult> deletePoolLedgerConfig(
 			String configName) throws SovrinException {
 

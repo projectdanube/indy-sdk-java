@@ -14,6 +14,7 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 
 	}
 
+	@Override
 	public Future<SignAndSubmitRequestResult> signAndSubmitRequest(
 			int walletHandle,
 			String submitterDid,
@@ -45,6 +46,7 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 		return future;
 	}
 
+	@Override
 	public Future<SubmitRequestResult> submitRequest(
 			int poolHandle,
 			String requestJson) throws SovrinException {
@@ -74,6 +76,7 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 		return future;
 	}
 
+	@Override
 	public Future<BuildGetDdoRequestResult> buildGetDdoRequest(
 			String submitterDid,
 			String targetDid,
@@ -104,6 +107,7 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 		return future;
 	}
 
+	@Override
 	public Future<BuildNymRequestResult> buildNymRequest(
 			String submitterDid,
 			String targetDid,
@@ -141,6 +145,7 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 		return future;
 	}
 
+	@Override
 	public Future<BuildAttribRequestResult> buildAttribRequest(
 			String submitterDid,
 			String targetDid,
@@ -176,6 +181,7 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 		return future;
 	}
 
+	@Override
 	public Future<BuildGetAttribRequestResult> buildGetAttribRequest(
 			String submitterDid,
 			String targetDid,
@@ -207,6 +213,7 @@ public class LedgerImpl extends SovrinModule implements Ledger {
 		return future;
 	}
 
+	@Override
 	public Future<BuildGetNymRequestResult> buildGetNymRequest(
 			String submitterDid,
 			String targetDid) throws SovrinException {
