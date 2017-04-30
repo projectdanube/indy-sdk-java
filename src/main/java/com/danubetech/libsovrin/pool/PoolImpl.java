@@ -47,7 +47,7 @@ public class PoolImpl extends SovrinModule implements Pool {
 	@Override
 	public Future<OpenPoolLedgerResult> openPoolLedger(
 			String configName,
-			OpenPoolLedgerConfigOptions config) throws SovrinException {
+			OpenPoolLedgerOptions config) throws SovrinException {
 
 		final CompletableFuture<OpenPoolLedgerResult> future = new CompletableFuture<> ();
 

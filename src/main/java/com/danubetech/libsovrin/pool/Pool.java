@@ -17,7 +17,7 @@ public interface Pool {
 
 	public Future<OpenPoolLedgerResult> openPoolLedger(
 			String configName,
-			OpenPoolLedgerConfigOptions config) throws SovrinException;
+			OpenPoolLedgerOptions config) throws SovrinException;
 
 	public Future<RefreshPoolLedgerResult> refreshPoolLedger(
 			int handle) throws SovrinException;
@@ -51,13 +51,13 @@ public interface Pool {
 		}
 	}
 
-	public static class OpenPoolLedgerConfigOptions extends SovrinJsonOptions {
+	public static class OpenPoolLedgerOptions extends SovrinJsonOptions {
 
 		private boolean refreshOnOpen;
 		private boolean autoRefreshTime;
 		private int networkTimeout;
 
-		public OpenPoolLedgerConfigOptions(boolean refreshOnOpen, boolean autoRefreshTime, int networkTimeout) {
+		public OpenPoolLedgerOptions(boolean refreshOnOpen, boolean autoRefreshTime, int networkTimeout) {
 
 			this.refreshOnOpen = refreshOnOpen;
 			this.autoRefreshTime = autoRefreshTime;
