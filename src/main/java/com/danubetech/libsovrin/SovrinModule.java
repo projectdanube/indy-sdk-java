@@ -6,7 +6,7 @@ public abstract class SovrinModule {
 
 	public static final int FIXED_COMMAND_HANDLE = 0;
 
-	protected boolean checkCallback(CompletableFuture<?> future, int xcommand_handle, int err) {
+	protected static boolean checkCallback(CompletableFuture<?> future, int xcommand_handle, int err) {
 
 		assert(xcommand_handle == FIXED_COMMAND_HANDLE);
 
@@ -16,7 +16,7 @@ public abstract class SovrinModule {
 		return true;
 	}
 
-	protected void checkResult(int result) throws SovrinException {
+	protected static void checkResult(int result) throws SovrinException {
 
 		ErrorCode errorCode = ErrorCode.valueOf(result);
 		if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
