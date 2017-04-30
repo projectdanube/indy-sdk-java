@@ -36,8 +36,8 @@ public abstract class LibSovrin {
 
 		public int sign_and_submit_request(int command_handle, int wallet_handle, String submitter_did, String request_json, Callback cb);
 		public int submit_request(int command_handle, int pool_handle, String request_json, Callback cb);
-		public int build_get_ddo_request(int command_handle, String submitter_did, String target_did, String verkey, String xref, String data, String role, Callback cb);
-		public int build_nym_request(int command_handle, String submitter_did, String target_did, Callback cb);
+		public int build_get_ddo_request(int command_handle, String submitter_did, String target_did, Callback cb);
+		public int build_nym_request(int command_handle, String submitter_did, String target_did, String verkey, String xref, String data, String role, Callback cb);
 		public int build_attrib_request(int command_handle, String submitter_did, String target_did, String hash, String raw, String enc, Callback cb);
 		public int build_get_attrib_request(int command_handle, String submitter_did, String target_did, String data, Callback cb);
 		public int build_get_nym_request(int command_handle, String submitter_did, String target_did, Callback cb);
