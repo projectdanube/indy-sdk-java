@@ -1,101 +1,260 @@
 package com.danubetech.libsovrin.signus;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
+import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
+import com.danubetech.libsovrin.SovrinModule;
+import com.danubetech.libsovrin.signus.SignusResults.CreateAndStoreMyDidResult;
+import com.danubetech.libsovrin.signus.SignusResults.DecryptResult;
+import com.danubetech.libsovrin.signus.SignusResults.EncryptResult;
+import com.danubetech.libsovrin.signus.SignusResults.ReplaceKeysResult;
+import com.danubetech.libsovrin.signus.SignusResults.SignResult;
+import com.danubetech.libsovrin.signus.SignusResults.StoreTheirDidResult;
+import com.danubetech.libsovrin.signus.SignusResults.VerifySignatureResult;
+import com.danubetech.libsovrin.wallet.Wallet;
+import com.sun.jna.Callback;
 
-public interface Signus {
+/**
+ * signus.rs API
+ */
+public class Signus extends SovrinModule {
+
+	private Signus() {
+
+	}
 
 	/*
-	 * Methods
+	 * STATIC METHODS
 	 */
 
-	public Future<CreateAndStoreMyDidResult> createAndStoreMyDid(
-			int walletHandle,
-			String didJson) throws SovrinException;
+	public static Future<CreateAndStoreMyDidResult> createAndStoreMyDid(
+			Wallet wallet,
+			String didJson) throws SovrinException {
 
-	public Future<ReplaceKeysResult> replaceKeys(
-			int walletHandle,
+		final CompletableFuture<CreateAndStoreMyDidResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String did, String verkey, String pk) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				CreateAndStoreMyDidResult result = new CreateAndStoreMyDidResult(did, verkey, pk);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_create_and_store_my_did(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				didJson,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<ReplaceKeysResult> replaceKeys(
+			Wallet wallet,
 			String did,
-			String identityJson) throws SovrinException;
+			String identityJson) throws SovrinException {
 
-	public Future<StoreTheirDidResult> storeTheirDid(
-			int walletHandle,
-			String identityJson) throws SovrinException;
+		final CompletableFuture<ReplaceKeysResult> future = new CompletableFuture<> ();
 
-	public Future<SignResult> sign(
-			int walletHandle,
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String verkey, String pk) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				ReplaceKeysResult result = new ReplaceKeysResult(verkey, pk);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_replace_keys(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				did,
+				identityJson,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<StoreTheirDidResult> storeTheirDid(
+			Wallet wallet,
+			String identityJson) throws SovrinException {
+
+		final CompletableFuture<StoreTheirDidResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				StoreTheirDidResult result = new StoreTheirDidResult();
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_store_their_did(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				identityJson,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<SignResult> sign(
+			Wallet wallet,
 			String did,
-			String msg) throws SovrinException;
+			String msg) throws SovrinException {
 
-	public Future<VerifySignatureResult> verifySignature(
-			int walletHandle,
+		final CompletableFuture<SignResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String signature) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				SignResult result = new SignResult(signature);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_sign(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				did,
+				msg,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<VerifySignatureResult> verifySignature(
+			Wallet wallet,
 			String did,
 			String msg,
-			String signature) throws SovrinException;
+			String signature) throws SovrinException {
 
-	public Future<EncryptResult> encrypt(
-			int walletHandle,
+		final CompletableFuture<VerifySignatureResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, boolean valid) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				VerifySignatureResult result = new VerifySignatureResult(valid);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_verify_signature(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				did,
+				msg,
+				signature,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<EncryptResult> encrypt(
+			Wallet wallet,
 			String did,
-			String msg) throws SovrinException;
+			String msg) throws SovrinException {
 
-	public Future<DecryptResult> decrypt(
-			int walletHandle,
+		final CompletableFuture<EncryptResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String encryptedMsg) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				EncryptResult result = new EncryptResult(encryptedMsg);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_encrypt(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				did,
+				msg,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<DecryptResult> decrypt(
+			Wallet wallet,
 			String did,
-			String encryptedMsg) throws SovrinException;
+			String encryptedMsg) throws SovrinException {
 
+		final CompletableFuture<DecryptResult> future = new CompletableFuture<> ();
 
-	/*
-	 * Results
-	 */
+		Callback callback = new Callback() {
 
-	public static class CreateAndStoreMyDidResult {
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String decryptedMsg) {
 
-		private String did, verkey, pk;
-		CreateAndStoreMyDidResult(String did, String verkey, String pk) { this.did = did; this.verkey = verkey; this.pk = pk; }
-		public String getDid() { return this.did; }
-		public String getVerkey() { return this.verkey; }
-		public String getPk() { return this.pk; }
-	}
+				if (! checkCallback(future, xcommand_handle, err)) return;
 
-	public static class ReplaceKeysResult {
+				DecryptResult result = new DecryptResult(decryptedMsg);
+				future.complete(result);
+			}
+		};
 
-		private String verkey, pk;
-		ReplaceKeysResult(String verkey, String pk) { this.verkey = verkey; this.pk = pk; }
-		public String getVerkey() { return this.verkey; }
-		public String getPk() { return this.pk; }
-	}
+		int walletHandle = wallet.getWalletHandle();
 
-	public static class StoreTheirDidResult {
+		int result = LibSovrin.api.sovrin_decrypt(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				did,
+				encryptedMsg,
+				callback);
 
-		StoreTheirDidResult() { }
-	}
+		checkResult(result);
 
-	public static class SignResult {
-
-		private String signature;
-		SignResult(String signature) { this.signature = signature; }
-		public String getSignature() { return this.signature; }
-	}
-
-	public static class VerifySignatureResult {
-
-		private boolean valid;
-		VerifySignatureResult(boolean valid) { this.valid = valid; }
-		public boolean isValid() { return this.valid; }
-	}
-
-	public static class EncryptResult {
-
-		private String encryptedMsg;
-		EncryptResult(String encryptedMsg) { this.encryptedMsg = encryptedMsg; }
-		public String getEncryptedMsg() { return this.encryptedMsg; }
-	}
-
-	public static class DecryptResult {
-
-		private String decryptedMsg;
-		DecryptResult(String decryptedMsg) { this.decryptedMsg = decryptedMsg; }
-		public String getDecryptedMsg() { return this.decryptedMsg; }
+		return future;
 	}
 }
