@@ -1,54 +1,46 @@
 package com.danubetech.libsovrin;
 
 import java.io.File;
-import java.util.concurrent.Future;
 
 import org.junit.Assert;
 
 import com.danubetech.libsovrin.ledger.Ledger;
-import com.danubetech.libsovrin.ledger.Ledger.BuildGetDdoRequestResult;
-import com.danubetech.libsovrin.ledger.Ledger.BuildGetNymRequestResult;
-import com.danubetech.libsovrin.ledger.LedgerImpl;
+import com.danubetech.libsovrin.ledger.LedgerResults.BuildGetDdoRequestResult;
+import com.danubetech.libsovrin.ledger.LedgerResults.BuildGetNymRequestResult;
 import com.danubetech.libsovrin.pool.Pool;
-import com.danubetech.libsovrin.pool.PoolImpl;
+import com.danubetech.libsovrin.pool.PoolOptions.OpenPoolLedgerOptions;
 
 import junit.framework.TestCase;
 
 public class LedgerTest extends TestCase {
 
-	private static Pool pool = new PoolImpl();
-	private static Ledger ledger = new LedgerImpl();
-
-	private int poolHandle;
+	private Pool pool;
 
 	@Override
 	protected void setUp() throws Exception {
 
 		if (! LibSovrin.isInitialized()) LibSovrin.init(new File("./lib/libsovrin.so"));
 
-/*		CreatePoolLedgerConfigOptions config1 = new CreatePoolLedgerConfigOptions(null);
-		pool.createPoolLedgerConfig("myconfig", null).get();
-		this.poolHandle = pool.openPoolLedger("myconfig", null).get().getPoolHandle();*/
+		OpenPoolLedgerOptions openPoolLedgerOptions = new OpenPoolLedgerOptions(null, null, null);
+		this.pool = Pool.openPoolLedger("myconfig", openPoolLedgerOptions).get().getPool();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 
-//		pool.closePoolLedger(this.poolHandle);
+		this.pool.closePoolLedger();
 	}
 
 	public void testLedger() throws Exception {
 
-		Future<BuildGetDdoRequestResult> future1 = ledger.buildGetDdoRequest("did:sov:21tDAKCERh95uGgKbJNHYp", "did:sov:1yvXbmgPoUm4dl66D7KhyD", "{}");
-		BuildGetDdoRequestResult result1 = future1.get();
+		BuildGetDdoRequestResult result1 = Ledger.buildGetDdoRequest("did:sov:21tDAKCERh95uGgKbJNHYp", "did:sov:1yvXbmgPoUm4dl66D7KhyD", "{}").get();
 		Assert.assertNotNull(result1);
 		String requestJson1 = result1.getRequestJson();
 		Assert.assertNotNull(requestJson1);
 
-		Future<BuildGetNymRequestResult> future2 = ledger.buildGetNymRequest("did:sov:21tDAKCERh95uGgKbJNHYp", "did:sov:1yvXbmgPoUm4dl66D7KhyD");
-		BuildGetNymRequestResult result2 = future2.get();
+		BuildGetNymRequestResult result2 = Ledger.buildGetNymRequest("did:sov:21tDAKCERh95uGgKbJNHYp", "did:sov:1yvXbmgPoUm4dl66D7KhyD").get();
 		Assert.assertNotNull(result2);
 		String requestJson2 = result2.getRequestJson();
-		Assert.assertNotNull(requestJson1);
+		Assert.assertNotNull(requestJson2);
 	}
 }

@@ -1,11 +1,9 @@
 package com.danubetech.libsovrin;
 
 import java.io.File;
-import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.pool.Pool;
-import com.danubetech.libsovrin.pool.Pool.OpenPoolLedgerResult;
-import com.danubetech.libsovrin.pool.PoolImpl;
+import com.danubetech.libsovrin.wallet.Wallet;
 
 public class Example {
 
@@ -13,10 +11,10 @@ public class Example {
 
 		if (! LibSovrin.isInitialized()) LibSovrin.init(new File("./lib/libsovrin.so"));
 
-		Pool pool = new PoolImpl();
-		Future<OpenPoolLedgerResult> result = pool.openPoolLedger("default", null);
+		Pool pool = Pool.openPoolLedger("default", null).get().getPool();
+		System.out.println("pool handle: " + pool.getPoolHandle());
 
-		int poolHandle = result.get().getPoolHandle();
-		System.out.println("pool handle: " + poolHandle);
+		Wallet wallet = Wallet.openWallet(pool, "default", null, null).get().getWallet();
+		System.out.println("wallet handle: " + wallet.getWalletHandle());
 	}
 }
