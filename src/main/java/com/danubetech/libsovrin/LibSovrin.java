@@ -1,6 +1,7 @@
 package com.danubetech.libsovrin;
 
 import java.io.File;
+import java.util.concurrent.CompletableFuture;
 
 import com.sun.jna.Callback;
 import com.sun.jna.Library;
@@ -58,76 +59,46 @@ public abstract class LibSovrin {
 		public int sovrin_decrypt(int command_handle, int wallet_handle, String did, String encrypted_msg, Callback cb);
 
 		// anoncreds.rs
-		
+
 		public int sovrin_issuer_create_and_store_claim_def(int command_handle, int wallet_handle, String schema_json, String signature_type, boolean create_non_revoc, Callback cb);
-/*		cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode,
-                                     claim_def_json: *const c_char,
-                                     claim_def_uuid: *const c_char
-                )>) -> ErrorCode {*/
-
 		public int sovrin_issuer_create_and_store_revoc_reg(int command_handle, int wallet_handle, int claim_def_seq_no, int max_claim_num, Callback cb);
-/*                            cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode,
-                                                 revoc_reg_json: *const c_char,
-                                                 revoc_reg_uuid: *const c_char
-                            )>) -> ErrorCode {*/
-
-/*	public int sovrin_issuer_create_claim(int command_handle, int wallet_handle, String claim_req_json, String claim_json,
-	        revoc_reg_seq_no: Option<i32>,
-	        user_revoc_index: Option<i32>,
-	        cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode,
-	                             revoc_reg_update_json: *const c_char,  //TODO must be OPTIONAL
-	                     xclaim_json: *const c_char
-	)>) -> ErrorCode {*/
-
 		public int sovrin_issuer_revoke_claim(int command_handle, int wallet_handle, int claim_def_seq_no, int revoc_reg_seq_no, int user_revoc_index, Callback cb);
-/*	            cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode,
-	                                 revoc_reg_update_json: *const c_char,
-	            )>) -> ErrorCode {*/
-
-	            	public int sovrin_prover_store_claim_offer(int command_handle, int wallet_handle, String claim_offer_json, Callback cb);
-/*	                        cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode
-	                        )>) -> ErrorCode {*/
-
-	public int sovrin_prover_get_claim_offers(int command_handle, int wallet_handle, String filter_json, Callback cb);
-/*	        cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode,
-	                             claim_offers_json: *const c_char
-	        )>) -> ErrorCode {*/
-
-	public int sovrin_prover_create_master_secret(int command_handle, int wallet_handle, String master_secret_name, Callback cb);
-/*	                    cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode
-	                    )>) -> ErrorCode {*/
-
-	public int sovrin_prover_create_and_store_claim_req(int command_handle, int wallet_handle, String prover_did, String claim_offer_json, String claim_def_json, String master_secret_name, Callback cb);
-/*            cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode,
-                                 claim_req_json: *const c_char
-            )>) -> ErrorCode {*/
-
-	public int sovrin_prover_store_claim(int command_handle, int wallet_handle, String claims_json, Callback cb);
-/*                        cb: Option<extern fn(
-                            xcommand_handle: i32, err: ErrorCode
-                        )>) -> ErrorCode {*/
-
-	public int sovrin_prover_get_claims(int command_handle, int wallet_handle, String filter_json, Callback cb);
-/*        cb: Option<extern fn(
-            xcommand_handle: i32, err: ErrorCode,
-            claims_json: *const c_char
-        )>) -> ErrorCode {*/
-
-	public int sovrin_prover_get_claims_for_proof_req(int command_handle, int wallet_handle, String proof_request_json, Callback cb);
-/*                    cb: Option<extern fn(
-                        xcommand_handle: i32, err: ErrorCode,
-                        claims_json: *const c_char
-                    )>) -> ErrorCode {*/
-
-	public int sovrin_prover_create_proof(int command_handle, int wallet_handle, String proof_req_json, String requested_claims_json, String schemas_json, String master_secret_name, String claim_defs_json, String revoc_regs_json, Callback cb);
-/*        cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode,
-                             proof_json: *const c_char)>) -> ErrorCode {*/
-
-	public int sovrin_verifier_verify_proof(int command_handle, int wallet_handle, String proof_request_json, String proof_json, String schemas_json, String claim_defs_jsons, String revoc_regs_json, Callback cb);
-/*	         cb: Option<extern fn(xcommand_handle: i32, err: ErrorCode,
-	                              valid: bool)>) -> ErrorCode {*/
+    	public int sovrin_prover_store_claim_offer(int command_handle, int wallet_handle, String claim_offer_json, Callback cb);
+		public int sovrin_prover_get_claim_offers(int command_handle, int wallet_handle, String filter_json, Callback cb);
+		public int sovrin_prover_create_master_secret(int command_handle, int wallet_handle, String master_secret_name, Callback cb);
+		public int sovrin_prover_create_and_store_claim_req(int command_handle, int wallet_handle, String prover_did, String claim_offer_json, String claim_def_json, String master_secret_name, Callback cb);
+		public int sovrin_prover_store_claim(int command_handle, int wallet_handle, String claims_json, Callback cb);
+		public int sovrin_prover_get_claims(int command_handle, int wallet_handle, String filter_json, Callback cb);
+		public int sovrin_prover_get_claims_for_proof_req(int command_handle, int wallet_handle, String proof_request_json, Callback cb);
+		public int sovrin_prover_create_proof(int command_handle, int wallet_handle, String proof_req_json, String requested_claims_json, String schemas_json, String master_secret_name, String claim_defs_json, String revoc_regs_json, Callback cb);
+		public int sovrin_verifier_verify_proof(int command_handle, int wallet_handle, String proof_request_json, String proof_json, String schemas_json, String claim_defs_jsons, String revoc_regs_json, Callback cb);
 	}
 
+	/*
+	 * Java APIs
+	 */
+	
+	public static class APIJava {
+
+		protected static final int FIXED_COMMAND_HANDLE = 0;
+
+		protected static boolean checkCallback(CompletableFuture<?> future, int xcommand_handle, int err) {
+
+			assert(xcommand_handle == FIXED_COMMAND_HANDLE);
+
+			ErrorCode errorCode = ErrorCode.valueOf(err);
+			if (! ErrorCode.Success.equals(errorCode)) { future.completeExceptionally(SovrinException.fromErrorCode(errorCode)); return false; }
+
+			return true;
+		}
+
+		protected static void checkResult(int result) throws SovrinException {
+
+			ErrorCode errorCode = ErrorCode.valueOf(result);
+			if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
+		}
+	}
+	
 	/*
 	 * Initialization
 	 */

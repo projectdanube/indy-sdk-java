@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
-import com.danubetech.libsovrin.SovrinModule;
 import com.danubetech.libsovrin.ledger.LedgerResults.BuildAttribRequestResult;
 import com.danubetech.libsovrin.ledger.LedgerResults.BuildClaimDefTxnResult;
 import com.danubetech.libsovrin.ledger.LedgerResults.BuildGetAttribRequestResult;
@@ -25,7 +24,7 @@ import com.sun.jna.Callback;
 /**
  * ledger.rs API
  */
-public class Ledger extends SovrinModule {
+public class Ledger extends LibSovrin.APIJava {
 
 	private Ledger() {
 

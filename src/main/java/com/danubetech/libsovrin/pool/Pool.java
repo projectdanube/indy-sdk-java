@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
-import com.danubetech.libsovrin.SovrinModule;
 import com.danubetech.libsovrin.pool.PoolOptions.CreatePoolLedgerConfigOptions;
 import com.danubetech.libsovrin.pool.PoolOptions.OpenPoolLedgerOptions;
 import com.danubetech.libsovrin.pool.PoolResults.ClosePoolLedgerResult;
@@ -18,7 +17,7 @@ import com.sun.jna.Callback;
 /**
  * pool.rs API
  */
-public class Pool extends SovrinModule {
+public class Pool extends LibSovrin.APIJava {
 
 	private final int poolHandle;
 

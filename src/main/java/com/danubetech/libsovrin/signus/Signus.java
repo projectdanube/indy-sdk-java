@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
-import com.danubetech.libsovrin.SovrinModule;
 import com.danubetech.libsovrin.signus.SignusResults.CreateAndStoreMyDidResult;
 import com.danubetech.libsovrin.signus.SignusResults.DecryptResult;
 import com.danubetech.libsovrin.signus.SignusResults.EncryptResult;
@@ -19,7 +18,7 @@ import com.sun.jna.Callback;
 /**
  * signus.rs API
  */
-public class Signus extends SovrinModule {
+public class Signus extends LibSovrin.APIJava {
 
 	private Signus() {
 
