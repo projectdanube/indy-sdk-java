@@ -75,4 +75,25 @@ public final class AnoncredsResults {
 		ProverGetClaimsResult(String claimsJson) { this.claimsJson = claimsJson; }
 		public String getClaimsJson() { return this.claimsJson; }
 	}
+
+	public static class ProverGetClaimsForProofReqResult {
+
+		private String claimsJson;
+		ProverGetClaimsForProofReqResult(String claimsJson) { this.claimsJson = claimsJson; }
+		public String getClaimsJson() { return this.claimsJson; }
+	}
+
+	public static class ProverCreateProofResult {
+
+		private String proofJson;
+		ProverCreateProofResult(String proofJson) { this.proofJson = proofJson; }
+		public String getProofJson() { return this.proofJson; }
+	}
+
+	public static class VerifierVerifyProofResult {
+
+		private boolean valid;
+		VerifierVerifyProofResult(boolean valid) { this.valid = valid; }
+		public boolean isValid() { return this.valid; }
+	}
 }
