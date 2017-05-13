@@ -55,7 +55,7 @@ public class Ledger extends LibSovrin.APIJava {
 
 		int walletHandle = wallet.getWalletHandle();
 
-		int result = LibSovrin.api.sign_and_submit_request(
+		int result = LibSovrin.api.sovrin_sign_and_submit_request(
 				FIXED_COMMAND_HANDLE, 
 				walletHandle, 
 				submitterDid,
@@ -87,7 +87,7 @@ public class Ledger extends LibSovrin.APIJava {
 
 		int poolHandle = pool.getPoolHandle();
 
-		int result = LibSovrin.api.submit_request(
+		int result = LibSovrin.api.sovrin_submit_request(
 				FIXED_COMMAND_HANDLE, 
 				poolHandle,
 				requestJson,
@@ -117,7 +117,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_get_ddo_request(
+		int result = LibSovrin.api.sovrin_build_get_ddo_request(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				targetDid,
@@ -150,7 +150,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_nym_request(
+		int result = LibSovrin.api.sovrin_build_nym_request(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				targetDid,
@@ -186,7 +186,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_attrib_request(
+		int result = LibSovrin.api.sovrin_build_attrib_request(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				targetDid,
@@ -219,7 +219,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_get_attrib_request(
+		int result = LibSovrin.api.sovrin_build_get_attrib_request(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				targetDid,
@@ -249,7 +249,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_get_nym_request(
+		int result = LibSovrin.api.sovrin_build_get_nym_request(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				targetDid,
@@ -278,7 +278,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_schema_request(
+		int result = LibSovrin.api.sovrin_build_schema_request(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				data,
@@ -307,7 +307,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_get_schema_request(
+		int result = LibSovrin.api.sovrin_build_get_schema_request(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				data,
@@ -337,7 +337,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_claim_def_txn(
+		int result = LibSovrin.api.sovrin_build_claim_def_txn(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				xref,
@@ -367,7 +367,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_get_claim_def_txn(
+		int result = LibSovrin.api.sovrin_build_get_claim_def_txn(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				xref,
@@ -397,7 +397,7 @@ public class Ledger extends LibSovrin.APIJava {
 			}
 		};
 
-		int result = LibSovrin.api.build_node_request(
+		int result = LibSovrin.api.sovrin_build_node_request(
 				FIXED_COMMAND_HANDLE, 
 				submitterDid,
 				targetDid,
