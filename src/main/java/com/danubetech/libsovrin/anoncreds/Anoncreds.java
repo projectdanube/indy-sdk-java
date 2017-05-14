@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
+import com.danubetech.libsovrin.SovrinJava;
 import com.danubetech.libsovrin.anoncreds.AnoncredsResults.IssuerCreateAndStoreClaimDefResult;
 import com.danubetech.libsovrin.wallet.Wallet;
 import com.sun.jna.Callback;
@@ -12,7 +13,7 @@ import com.sun.jna.Callback;
 /**
  * anoncreds.rs API
  */
-public class Anoncreds extends LibSovrin.APIJava {
+public class Anoncreds extends SovrinJava.API {
 
 	private Anoncreds() {
 

@@ -1,6 +1,6 @@
 package com.danubetech.libsovrin.pool;
 
-import com.danubetech.libsovrin.SovrinJsonOptions;
+import com.danubetech.libsovrin.SovrinJava;
 
 /**
  * pool.rs Options
@@ -11,7 +11,7 @@ public final class PoolOptions {
 
 	}
 
-	public static class CreatePoolLedgerConfigOptions extends SovrinJsonOptions {
+	public static class CreatePoolLedgerConfigOptions extends SovrinJava.Options {
 
 		public CreatePoolLedgerConfigOptions(String genesisTxn) {
 
@@ -19,7 +19,7 @@ public final class PoolOptions {
 		}
 	}
 
-	public static class OpenPoolLedgerOptions extends SovrinJsonOptions {
+	public static class OpenPoolLedgerOptions extends SovrinJava.Options {
 
 		public OpenPoolLedgerOptions(Boolean refreshOnOpen, Boolean autoRefreshTime, Integer networkTimeout) {
 

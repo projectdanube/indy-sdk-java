@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
+import com.danubetech.libsovrin.SovrinJava;
 import com.danubetech.libsovrin.wallet.WalletResults.CloseWalletResult;
 import com.danubetech.libsovrin.wallet.WalletResults.CreateWalletResult;
 import com.danubetech.libsovrin.wallet.WalletResults.DeleteWalletResult;
@@ -15,7 +16,7 @@ import com.sun.jna.Callback;
 /**
  * wallet.rs API
  */
-public class Wallet extends LibSovrin.APIJava {
+public class Wallet extends SovrinJava.API {
 
 	private final int walletHandle;
 

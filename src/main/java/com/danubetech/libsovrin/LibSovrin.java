@@ -1,7 +1,6 @@
 package com.danubetech.libsovrin;
 
 import java.io.File;
-import java.util.concurrent.CompletableFuture;
 
 import com.sun.jna.Callback;
 import com.sun.jna.Library;
@@ -74,31 +73,6 @@ public abstract class LibSovrin {
 		public int sovrin_verifier_verify_proof(int command_handle, int wallet_handle, String proof_request_json, String proof_json, String schemas_json, String claim_defs_jsons, String revoc_regs_json, Callback cb);
 	}
 
-	/*
-	 * Java APIs
-	 */
-	
-	public static class APIJava {
-
-		protected static final int FIXED_COMMAND_HANDLE = 0;
-
-		protected static boolean checkCallback(CompletableFuture<?> future, int xcommand_handle, int err) {
-
-			assert(xcommand_handle == FIXED_COMMAND_HANDLE);
-
-			ErrorCode errorCode = ErrorCode.valueOf(err);
-			if (! ErrorCode.Success.equals(errorCode)) { future.completeExceptionally(SovrinException.fromErrorCode(errorCode)); return false; }
-
-			return true;
-		}
-
-		protected static void checkResult(int result) throws SovrinException {
-
-			ErrorCode errorCode = ErrorCode.valueOf(result);
-			if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
-		}
-	}
-	
 	/*
 	 * Initialization
 	 */
