@@ -40,14 +40,14 @@ public class WalletTest extends TestCase {
 		CreateWalletResult result1 = Wallet.createWallet("default", "mywallet", null, null, null).get();
 		Assert.assertNotNull(result1);
 
-		OpenWalletResult result2 = Wallet.openWallet(this.pool, "mywallet", null, null).get();
+		OpenWalletResult result2 = Wallet.openWallet("mywallet", null, null).get();
 		Assert.assertNotNull(result2);
 		wallet = result2.getWallet();
 
 		CloseWalletResult result3 = wallet.closeWallet().get();
 		Assert.assertNotNull(result3);
 
-		DeleteWalletResult result4 = Wallet.deleteWallet("mywallet").get();
+		DeleteWalletResult result4 = Wallet.deleteWallet("mywallet", null).get();
 		Assert.assertNotNull(result4);
 	}
 }

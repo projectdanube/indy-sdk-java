@@ -14,7 +14,7 @@ public class Example {
 		Pool pool = Pool.openPoolLedger("default", null).get().getPool();
 		System.out.println("pool handle: " + pool.getPoolHandle());
 
-		Wallet wallet = Wallet.openWallet(pool, "default", null, null).get().getWallet();
+		Wallet wallet = Wallet.openWallet("default", null, null).get().getWallet();
 		System.out.println("wallet handle: " + wallet.getWalletHandle());
 	}
 }

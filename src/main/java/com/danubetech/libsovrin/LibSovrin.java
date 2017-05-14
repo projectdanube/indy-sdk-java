@@ -28,9 +28,9 @@ public abstract class LibSovrin {
 		// wallet.rs
 
 		public int sovrin_create_wallet(int command_handle, String pool_name, String name, String xtype, String config, String credentials, Callback cb);
-		public int sovrin_open_wallet(int command_handle, int pool_handle, String name, String config, String credentials, Callback cb);
+		public int sovrin_open_wallet(int command_handle, String name, String runtime_config, String credentials, Callback cb);
 		public int sovrin_close_wallet(int command_handle, int handle, Callback cb);
-		public int sovrin_delete_wallet(int command_handle, String name, Callback cb);
+		public int sovrin_delete_wallet(int command_handle, String name, String credentials, Callback cb);
 		public int sovrin_wallet_set_seq_no_for_value(int command_handle, int wallet_handle, String wallet_key, Callback cb);
 
 		// ledger.rs

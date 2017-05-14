@@ -26,7 +26,7 @@ public class SignusTest extends TestCase {
 
 		OpenPoolLedgerOptions openPoolLedgerOptions = new OpenPoolLedgerOptions(null, null, null);
 		this.pool = Pool.openPoolLedger("myconfig", openPoolLedgerOptions).get().getPool();
-		this.wallet = Wallet.openWallet(this.pool, "mywallet", null, null).get().getWallet();
+		this.wallet = Wallet.openWallet("mywallet", null, null).get().getWallet();
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class SignusTest extends TestCase {
 
 		this.wallet.closeWallet();
 		this.pool.closePoolLedger();
-		Wallet.deleteWallet("mywallet");
+		Wallet.deleteWallet("mywallet", null);
 	}
 
 	public void testSignus() throws Exception {

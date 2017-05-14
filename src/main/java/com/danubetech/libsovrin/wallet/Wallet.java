@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
-import com.danubetech.libsovrin.pool.Pool;
 import com.danubetech.libsovrin.wallet.WalletResults.CloseWalletResult;
 import com.danubetech.libsovrin.wallet.WalletResults.CreateWalletResult;
 import com.danubetech.libsovrin.wallet.WalletResults.DeleteWalletResult;
@@ -74,9 +73,8 @@ public class Wallet extends LibSovrin.APIJava {
 	}
 
 	public static Future<OpenWalletResult> openWallet(
-			Pool pool,
 			String name,
-			String config,
+			String runtimeConfig,
 			String credentials) throws SovrinException {
 
 		final CompletableFuture<OpenWalletResult> future = new CompletableFuture<> ();
@@ -94,14 +92,11 @@ public class Wallet extends LibSovrin.APIJava {
 				future.complete(result);
 			}
 		};
-
-		int poolHandle = pool.getPoolHandle();
 		
 		int result = LibSovrin.api.sovrin_open_wallet(
 				FIXED_COMMAND_HANDLE, 
-				poolHandle, 
 				name,
-				config,
+				runtimeConfig,
 				credentials,
 				callback);
 
@@ -138,7 +133,8 @@ public class Wallet extends LibSovrin.APIJava {
 	}
 
 	public static Future<DeleteWalletResult> deleteWallet(
-			String name) throws SovrinException {
+			String name,
+			String credentials) throws SovrinException {
 
 		final CompletableFuture<DeleteWalletResult> future = new CompletableFuture<> ();
 
@@ -156,7 +152,8 @@ public class Wallet extends LibSovrin.APIJava {
 
 		int result = LibSovrin.api.sovrin_delete_wallet(
 				FIXED_COMMAND_HANDLE, 
-				name, 
+				name,
+				credentials,
 				callback);
 
 		checkResult(result);
