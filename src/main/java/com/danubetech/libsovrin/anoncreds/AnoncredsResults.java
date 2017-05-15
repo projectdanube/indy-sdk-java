@@ -47,11 +47,11 @@ public final class AnoncredsResults {
 		ProverStoreClaimOfferResult() { }
 	}
 
-	public static class ProverGetClaimsOffersResult implements SovrinJava.Result {
+	public static class ProverGetClaimOffersResult implements SovrinJava.Result {
 
-		private String claimsOffersJson;
-		ProverGetClaimsOffersResult(String claimsOffersJson) { this.claimsOffersJson = claimsOffersJson; }
-		public String getClaimsOffersJson() { return this.claimsOffersJson; }
+		private String claimOffersJson;
+		ProverGetClaimOffersResult(String claimOffersJson) { this.claimOffersJson = claimOffersJson; }
+		public String getClaimOffersJson() { return this.claimOffersJson; }
 	}
 
 	public static class ProverCreateMasterSecretResult implements SovrinJava.Result {

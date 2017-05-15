@@ -7,6 +7,10 @@ import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
 import com.danubetech.libsovrin.SovrinJava;
 import com.danubetech.libsovrin.anoncreds.AnoncredsResults.IssuerCreateAndStoreClaimDefResult;
+import com.danubetech.libsovrin.anoncreds.AnoncredsResults.IssuerCreateAndStoreRevocRegResult;
+import com.danubetech.libsovrin.anoncreds.AnoncredsResults.IssuerRevokeClaimResult;
+import com.danubetech.libsovrin.anoncreds.AnoncredsResults.ProverGetClaimOffersResult;
+import com.danubetech.libsovrin.anoncreds.AnoncredsResults.ProverStoreClaimOfferResult;
 import com.danubetech.libsovrin.wallet.Wallet;
 import com.sun.jna.Callback;
 
@@ -51,6 +55,136 @@ public class Anoncreds extends SovrinJava.API {
 				schemaJson,
 				signatureType,
 				createNonRevoc,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<IssuerCreateAndStoreRevocRegResult> issuerCreateAndStoreRevocReg(
+			Wallet wallet,
+			int claimDefSeqNo, 
+			int maxClaimNum) throws SovrinException {
+
+		final CompletableFuture<IssuerCreateAndStoreRevocRegResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String revoc_reg_json, String revoc_reg_uuid) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				IssuerCreateAndStoreRevocRegResult result = new IssuerCreateAndStoreRevocRegResult(revoc_reg_json, revoc_reg_uuid);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_issuer_create_and_store_revoc_reg(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				claimDefSeqNo,
+				maxClaimNum,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<IssuerRevokeClaimResult> issuerRevokeClaim(
+			Wallet wallet,
+			int claimDefSeqNo, 
+			int revocRegSeqNo, 
+			int userRevocIndex) throws SovrinException {
+
+		final CompletableFuture<IssuerRevokeClaimResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String revoc_reg_update_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				IssuerRevokeClaimResult result = new IssuerRevokeClaimResult(revoc_reg_update_json);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_issuer_revoke_claim(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				claimDefSeqNo,
+				revocRegSeqNo,
+				userRevocIndex,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<ProverStoreClaimOfferResult> proverStoreClaimOffer(
+			Wallet wallet,
+			String claimOfferJson) throws SovrinException {
+
+		final CompletableFuture<ProverStoreClaimOfferResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				ProverStoreClaimOfferResult result = new ProverStoreClaimOfferResult();
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_prover_store_claim_offer(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				claimOfferJson,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<ProverGetClaimOffersResult> proverGetClaimOffers(
+			Wallet wallet,
+			String filterJson) throws SovrinException {
+
+		final CompletableFuture<ProverGetClaimOffersResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String claim_offers_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				ProverGetClaimOffersResult result = new ProverGetClaimOffersResult(claim_offers_json);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_prover_get_claim_offers(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				filterJson,
 				callback);
 
 		checkResult(result);
