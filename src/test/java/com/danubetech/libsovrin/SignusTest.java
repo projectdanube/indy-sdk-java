@@ -6,7 +6,7 @@ import java.util.concurrent.Future;
 import org.junit.Assert;
 
 import com.danubetech.libsovrin.pool.Pool;
-import com.danubetech.libsovrin.pool.PoolOptions.OpenPoolLedgerOptions;
+import com.danubetech.libsovrin.pool.PoolJSONParameters.OpenPoolLedgerJSONParameter;
 import com.danubetech.libsovrin.signus.Signus;
 import com.danubetech.libsovrin.signus.SignusResults.CreateAndStoreMyDidResult;
 import com.danubetech.libsovrin.signus.SignusResults.ReplaceKeysResult;
@@ -24,7 +24,7 @@ public class SignusTest extends TestCase {
 
 		if (! LibSovrin.isInitialized()) LibSovrin.init(new File("./lib/libsovrin.so"));
 
-		OpenPoolLedgerOptions openPoolLedgerOptions = new OpenPoolLedgerOptions(null, null, null);
+		OpenPoolLedgerJSONParameter openPoolLedgerOptions = new OpenPoolLedgerJSONParameter(null, null, null);
 		this.pool = Pool.openPoolLedger("myconfig", openPoolLedgerOptions).get().getPool();
 		this.wallet = Wallet.openWallet("mywallet", null, null).get().getWallet();
 	}
@@ -39,7 +39,7 @@ public class SignusTest extends TestCase {
 
 	public void testSignus() throws Exception {
 
-		Future<CreateAndStoreMyDidResult> future1 = Signus.createAndStoreMyDid(this.wallet, "{}");
+		Future<CreateAndStoreMyDidResult> future1 = Signus.createAndStoreMyDid(this.wallet, null);
 		CreateAndStoreMyDidResult result1 = future1.get();
 		Assert.assertNotNull(result1);
 		String did1 = result1.getDid();

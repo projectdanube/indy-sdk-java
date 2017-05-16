@@ -5,7 +5,7 @@ import java.io.File;
 import org.junit.Assert;
 
 import com.danubetech.libsovrin.pool.Pool;
-import com.danubetech.libsovrin.pool.PoolOptions.OpenPoolLedgerOptions;
+import com.danubetech.libsovrin.pool.PoolJSONParameters.OpenPoolLedgerJSONParameter;
 import com.danubetech.libsovrin.wallet.Wallet;
 import com.danubetech.libsovrin.wallet.WalletResults.CloseWalletResult;
 import com.danubetech.libsovrin.wallet.WalletResults.CreateWalletResult;
@@ -23,7 +23,7 @@ public class WalletTest extends TestCase {
 
 		if (! LibSovrin.isInitialized()) LibSovrin.init(new File("./lib/libsovrin.so"));
 
-		OpenPoolLedgerOptions openPoolLedgerOptions = new OpenPoolLedgerOptions(null, null, null);
+		OpenPoolLedgerJSONParameter openPoolLedgerOptions = new OpenPoolLedgerJSONParameter(null, null, null);
 		this.pool = Pool.openPoolLedger("myconfig", openPoolLedgerOptions).get().getPool();
 	}
 

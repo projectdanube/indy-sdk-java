@@ -6,7 +6,7 @@ import java.util.concurrent.Future;
 import org.junit.Assert;
 
 import com.danubetech.libsovrin.pool.Pool;
-import com.danubetech.libsovrin.pool.PoolOptions.OpenPoolLedgerOptions;
+import com.danubetech.libsovrin.pool.PoolJSONParameters.OpenPoolLedgerJSONParameter;
 import com.danubetech.libsovrin.pool.PoolResults.OpenPoolLedgerResult;
 
 import junit.framework.TestCase;
@@ -31,7 +31,7 @@ public class PoolTest extends TestCase {
 		CreatePoolLedgerConfigResult result1 = future1.get();
 		Assert.assertNotNull(result1);*/
 
-		OpenPoolLedgerOptions config2 = new OpenPoolLedgerOptions(null, null, null);
+		OpenPoolLedgerJSONParameter config2 = new OpenPoolLedgerJSONParameter(null, null, null);
 		Future<OpenPoolLedgerResult> future2 = Pool.openPoolLedger("myconfig", config2);
 		OpenPoolLedgerResult result2 = future2.get();
 		Assert.assertNotNull(result2);

@@ -33,10 +33,10 @@ public class SovrinJava {
 	}
 
 	/*
-	 * Options
+	 * JSON parameter
 	 */
 
-	public abstract static class Options {
+	public abstract static class JsonParameter {
 
 		protected Map<String, Object> map = new HashMap<String, Object> ();
 

@@ -6,8 +6,8 @@ import java.util.concurrent.Future;
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
 import com.danubetech.libsovrin.SovrinJava;
-import com.danubetech.libsovrin.pool.PoolOptions.CreatePoolLedgerConfigOptions;
-import com.danubetech.libsovrin.pool.PoolOptions.OpenPoolLedgerOptions;
+import com.danubetech.libsovrin.pool.PoolJSONParameters.CreatePoolLedgerConfigJSONParameter;
+import com.danubetech.libsovrin.pool.PoolJSONParameters.OpenPoolLedgerJSONParameter;
 import com.danubetech.libsovrin.pool.PoolResults.ClosePoolLedgerResult;
 import com.danubetech.libsovrin.pool.PoolResults.CreatePoolLedgerConfigResult;
 import com.danubetech.libsovrin.pool.PoolResults.DeletePoolLedgerConfigResult;
@@ -38,7 +38,7 @@ public class Pool extends SovrinJava.API {
 	
 	public static Future<CreatePoolLedgerConfigResult> createPoolLedgerConfig(
 			String configName,
-			CreatePoolLedgerConfigOptions config) throws SovrinException {
+			CreatePoolLedgerConfigJSONParameter config) throws SovrinException {
 
 		final CompletableFuture<CreatePoolLedgerConfigResult> future = new CompletableFuture<> ();
 
@@ -67,7 +67,7 @@ public class Pool extends SovrinJava.API {
 
 	public static Future<OpenPoolLedgerResult> openPoolLedger(
 			String configName,
-			OpenPoolLedgerOptions config) throws SovrinException {
+			OpenPoolLedgerJSONParameter config) throws SovrinException {
 
 		final CompletableFuture<OpenPoolLedgerResult> future = new CompletableFuture<> ();
 

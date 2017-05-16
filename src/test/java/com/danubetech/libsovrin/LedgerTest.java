@@ -8,7 +8,7 @@ import com.danubetech.libsovrin.ledger.Ledger;
 import com.danubetech.libsovrin.ledger.LedgerResults.BuildGetDdoRequestResult;
 import com.danubetech.libsovrin.ledger.LedgerResults.BuildGetNymRequestResult;
 import com.danubetech.libsovrin.pool.Pool;
-import com.danubetech.libsovrin.pool.PoolOptions.OpenPoolLedgerOptions;
+import com.danubetech.libsovrin.pool.PoolJSONParameters.OpenPoolLedgerJSONParameter;
 
 import junit.framework.TestCase;
 
@@ -21,7 +21,7 @@ public class LedgerTest extends TestCase {
 
 		if (! LibSovrin.isInitialized()) LibSovrin.init(new File("./lib/libsovrin.so"));
 
-		OpenPoolLedgerOptions openPoolLedgerOptions = new OpenPoolLedgerOptions(null, null, null);
+		OpenPoolLedgerJSONParameter openPoolLedgerOptions = new OpenPoolLedgerJSONParameter(null, null, null);
 		this.pool = Pool.openPoolLedger("myconfig", openPoolLedgerOptions).get().getPool();
 	}
 
