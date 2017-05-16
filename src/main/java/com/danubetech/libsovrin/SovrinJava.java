@@ -73,9 +73,12 @@ public class SovrinJava {
 				Map.Entry<String, Object> entry = iterator.next();
 				String key = entry.getKey();
 				Object value = entry.getValue();
-				builder.append("\"" + key + "\":\"");
-				builder.append(escapeJson(value.toString()));
-				builder.append("\"");
+				builder.append("\"" + key + "\":");
+				if (value instanceof String) builder.append("\"" + escapeJson(value.toString()) + "\"");
+				else if (value instanceof Boolean) builder.append(value.toString());
+				else if (value instanceof Number) builder.append(value.toString());
+				else if (value == null) builder.append("null");
+				else throw new IllegalArgumentException("Invalid value type: " + value + " (" + value.getClass() + ")");
 				if (iterator.hasNext()) builder.append(",");
 			}
 
