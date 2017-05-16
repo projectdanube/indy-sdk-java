@@ -85,7 +85,7 @@ public class Pool extends SovrinJava.API {
 			}
 		};
 
-		int result = LibSovrin.api.sovrin_create_pool_ledger_config(
+		int result = LibSovrin.api.sovrin_open_pool_ledger(
 				FIXED_COMMAND_HANDLE, 
 				configName, 
 				config == null ? null : config.toJson(), 
