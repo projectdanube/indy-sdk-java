@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class SovrinJava {
 
@@ -33,6 +34,24 @@ public class SovrinJava {
 
 			ErrorCode errorCode = ErrorCode.valueOf(result);
 			if (! ErrorCode.Success.equals(errorCode)) throw SovrinException.fromErrorCode(errorCode);
+		}
+
+		@Override
+		public int hashCode() {
+
+			return HashCodeBuilder.reflectionHashCode(this, false);
+		}
+
+		@Override
+		public boolean equals(Object other) {
+
+			return EqualsBuilder.reflectionEquals(this, other, false);
+		}
+
+		@Override
+		public String toString() {
+
+			return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 		}
 	}
 
@@ -110,7 +129,7 @@ public class SovrinJava {
 		@Override
 		public String toString() {
 
-			return ToStringBuilder.reflectionToString(this);
+			return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 		}
 	}
 }
