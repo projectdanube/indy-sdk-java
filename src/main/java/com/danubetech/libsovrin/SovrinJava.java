@@ -60,6 +60,8 @@ public class SovrinJava {
 				if (iterator.hasNext()) builder.append(",");
 			}
 
+			builder.append("}");
+
 			return builder.toString();
 		}
 
