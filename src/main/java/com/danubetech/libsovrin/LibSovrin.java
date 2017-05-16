@@ -61,6 +61,7 @@ public abstract class LibSovrin {
 
 		public int sovrin_issuer_create_and_store_claim_def(int command_handle, int wallet_handle, String schema_json, String signature_type, boolean create_non_revoc, Callback cb);
 		public int sovrin_issuer_create_and_store_revoc_reg(int command_handle, int wallet_handle, int claim_def_seq_no, int max_claim_num, Callback cb);
+		public int sovrin_issuer_create_claim(int command_handle, int wallet_handle, String claim_req_json, String claim_json, int revoc_reg_seq_no, int user_revoc_index, Callback cb);
 		public int sovrin_issuer_revoke_claim(int command_handle, int wallet_handle, int claim_def_seq_no, int revoc_reg_seq_no, int user_revoc_index, Callback cb);
     	public int sovrin_prover_store_claim_offer(int command_handle, int wallet_handle, String claim_offer_json, Callback cb);
 		public int sovrin_prover_get_claim_offers(int command_handle, int wallet_handle, String filter_json, Callback cb);

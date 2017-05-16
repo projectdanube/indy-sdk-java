@@ -8,6 +8,7 @@ import com.danubetech.libsovrin.SovrinException;
 import com.danubetech.libsovrin.SovrinJava;
 import com.danubetech.libsovrin.anoncreds.AnoncredsResults.IssuerCreateAndStoreClaimDefResult;
 import com.danubetech.libsovrin.anoncreds.AnoncredsResults.IssuerCreateAndStoreRevocRegResult;
+import com.danubetech.libsovrin.anoncreds.AnoncredsResults.IssuerCreateClaimResult;
 import com.danubetech.libsovrin.anoncreds.AnoncredsResults.IssuerRevokeClaimResult;
 import com.danubetech.libsovrin.anoncreds.AnoncredsResults.ProverGetClaimOffersResult;
 import com.danubetech.libsovrin.anoncreds.AnoncredsResults.ProverStoreClaimOfferResult;
@@ -88,6 +89,43 @@ public class Anoncreds extends SovrinJava.API {
 				walletHandle, 
 				claimDefSeqNo,
 				maxClaimNum,
+				callback);
+
+		checkResult(result);
+
+		return future;
+	}
+
+	public static Future<IssuerCreateClaimResult> issuerCreateClaim(
+			Wallet wallet,
+			String claimReqJson, 
+			String claimJson,
+			int revocRegSeqNo,
+			int userRevocIndex) throws SovrinException {
+
+		final CompletableFuture<IssuerCreateClaimResult> future = new CompletableFuture<> ();
+
+		Callback callback = new Callback() {
+
+			@SuppressWarnings("unused")
+			public void callback(int xcommand_handle, int err, String revoc_reg_update_json, String xclaim_json) {
+
+				if (! checkCallback(future, xcommand_handle, err)) return;
+
+				IssuerCreateClaimResult result = new IssuerCreateClaimResult(revoc_reg_update_json, xclaim_json);
+				future.complete(result);
+			}
+		};
+
+		int walletHandle = wallet.getWalletHandle();
+
+		int result = LibSovrin.api.sovrin_issuer_create_claim(
+				FIXED_COMMAND_HANDLE, 
+				walletHandle, 
+				claimReqJson,
+				claimJson,
+				revocRegSeqNo,
+				userRevocIndex,
 				callback);
 
 		checkResult(result);
