@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
 import com.danubetech.libsovrin.SovrinJava;
+import com.danubetech.libsovrin.signus.SignusJSONParameters.CreateAndStoreMyDidJSONParameter;
 import com.danubetech.libsovrin.signus.SignusResults.CreateAndStoreMyDidResult;
 import com.danubetech.libsovrin.signus.SignusResults.DecryptResult;
 import com.danubetech.libsovrin.signus.SignusResults.EncryptResult;
@@ -31,7 +32,7 @@ public class Signus extends SovrinJava.API {
 
 	public static Future<CreateAndStoreMyDidResult> createAndStoreMyDid(
 			Wallet wallet,
-			String didJson) throws SovrinException {
+			CreateAndStoreMyDidJSONParameter didJson) throws SovrinException {
 
 		final CompletableFuture<CreateAndStoreMyDidResult> future = new CompletableFuture<> ();
 
@@ -52,7 +53,7 @@ public class Signus extends SovrinJava.API {
 		int result = LibSovrin.api.sovrin_create_and_store_my_did(
 				FIXED_COMMAND_HANDLE, 
 				walletHandle, 
-				didJson,
+				didJson == null ? null : didJson.toJson(),
 				callback);
 
 		checkResult(result);

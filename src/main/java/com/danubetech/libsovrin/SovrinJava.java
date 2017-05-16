@@ -5,6 +5,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class SovrinJava {
 
 	/*
@@ -63,13 +67,48 @@ public class SovrinJava {
 
 			return string.replace("\\", "\\\\").replace("\"", "\\\"");
 		}
+
+		@Override
+		public int hashCode() {
+
+			return this.map.hashCode();
+		}
+
+		@Override
+		public boolean equals(Object other) {
+
+			return this.map.equals(other);
+		}
+
+		@Override
+		public String toString() {
+
+			return this.toJson();
+		}
 	}
 
 	/*
 	 * Result
 	 */
 
-	public interface Result {
+	public abstract static class Result {
 
+		@Override
+		public int hashCode() {
+
+			return HashCodeBuilder.reflectionHashCode(this, false);
+		}
+
+		@Override
+		public boolean equals(Object other) {
+
+			return EqualsBuilder.reflectionEquals(this, other, false);
+		}
+
+		@Override
+		public String toString() {
+
+			return ToStringBuilder.reflectionToString(this);
+		}
 	}
 }

@@ -11,29 +11,29 @@ public final class WalletResults {
 
 	}
 
-	public static class CreateWalletResult implements SovrinJava.Result {
+	public static class CreateWalletResult extends SovrinJava.Result {
 
 		CreateWalletResult() { }
 	}
 
-	public static class OpenWalletResult implements SovrinJava.Result {
+	public static class OpenWalletResult extends SovrinJava.Result {
 
 		private Wallet wallet;
 		OpenWalletResult(Wallet wallet) { this.wallet = wallet; }
 		public Wallet getWallet() { return this.wallet; }
 	}
 
-	public static class CloseWalletResult implements SovrinJava.Result {
+	public static class CloseWalletResult extends SovrinJava.Result {
 
 		CloseWalletResult() { }
 	}
 
-	public static class DeleteWalletResult implements SovrinJava.Result {
+	public static class DeleteWalletResult extends SovrinJava.Result {
 
 		DeleteWalletResult() { }
 	}
 
-	public static class WalletSetSeqNoForValueResult implements SovrinJava.Result {
+	public static class WalletSetSeqNoForValueResult extends SovrinJava.Result {
 
 		WalletSetSeqNoForValueResult() { }
 	}
