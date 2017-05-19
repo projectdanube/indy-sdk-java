@@ -36,6 +36,7 @@ public class Ledger extends SovrinJava.API {
 	 */
 
 	public static Future<SignAndSubmitRequestResult> signAndSubmitRequest(
+			Pool pool,
 			Wallet wallet,
 			String submitterDid,
 			String requestJson) throws SovrinException {
@@ -54,10 +55,12 @@ public class Ledger extends SovrinJava.API {
 			}
 		};
 
+		int poolHandle = pool.getPoolHandle();
 		int walletHandle = wallet.getWalletHandle();
 
 		int result = LibSovrin.api.sovrin_sign_and_submit_request(
 				FIXED_COMMAND_HANDLE, 
+				poolHandle,
 				walletHandle, 
 				submitterDid,
 				requestJson,
