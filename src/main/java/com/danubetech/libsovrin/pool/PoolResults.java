@@ -3,7 +3,7 @@ package com.danubetech.libsovrin.pool;
 import com.danubetech.libsovrin.SovrinJava;
 
 /**
- * pool.rs Results
+ * pool.rs results
  */
 public final class PoolResults {
 

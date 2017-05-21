@@ -3,7 +3,7 @@ package com.danubetech.libsovrin.ledger;
 import com.danubetech.libsovrin.SovrinJava;
 
 /**
- * ledger.rs Results
+ * ledger.rs results
  */
 public final class LedgerResults {
 

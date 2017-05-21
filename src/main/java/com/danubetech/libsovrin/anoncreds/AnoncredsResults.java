@@ -3,7 +3,7 @@ package com.danubetech.libsovrin.anoncreds;
 import com.danubetech.libsovrin.SovrinJava;
 
 /**
- * anoncreds.rs Results
+ * anoncreds.rs results
  */
 public final class AnoncredsResults {
 

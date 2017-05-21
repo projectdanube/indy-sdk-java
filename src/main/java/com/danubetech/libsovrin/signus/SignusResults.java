@@ -3,7 +3,7 @@ package com.danubetech.libsovrin.signus;
 import com.danubetech.libsovrin.SovrinJava;
 
 /**
- * signus.rs Results
+ * signus.rs results
  */
 public final class SignusResults {
 

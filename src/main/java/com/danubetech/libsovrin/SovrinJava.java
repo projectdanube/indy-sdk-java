@@ -10,6 +10,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * Common functionality for the APIs, JSON parameters, and results used
+ * by the Java wrapper of libsovrin. 
+ */
 public class SovrinJava {
 
 	/*
