@@ -11,6 +11,6 @@ public class SovrinException extends Exception {
 
 	public static SovrinException fromErrorCode(ErrorCode errorCode) {
 
-		return new SovrinException(errorCode.name() + ": " + errorCode.value());
+		return new SovrinException("" + (errorCode == null ? null : errorCode.name()) + ": " + (errorCode == null ? null : errorCode.value()));
 	}
 }
