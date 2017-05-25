@@ -10,7 +10,7 @@ Pull requests welcome!
 
 ### How to build
 
-First, build the native "sovrin" library at https://github.com/evernym/sovrin-client-rust:
+First, build the native "sovrin" library at https://github.com/hyperledger/indy-sdk:
 
 	cargo build
 
