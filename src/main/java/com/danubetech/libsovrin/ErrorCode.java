@@ -39,6 +39,8 @@ public enum ErrorCode {
     // Invalid library state was detected in runtime. It signals library bug
     CommonInvalidState(109),
 
+    CommonInvalidStructure(110),
+
     // Wallet errors
     // Caller passed invalid wallet handle
     WalletInvalidHandle(200),
