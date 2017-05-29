@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 import com.danubetech.libsovrin.LibSovrin;
 import com.danubetech.libsovrin.SovrinException;
 import com.danubetech.libsovrin.SovrinJava;
+import com.danubetech.libsovrin.pool.Pool;
 import com.danubetech.libsovrin.signus.SignusJSONParameters.CreateAndStoreMyDidJSONParameter;
 import com.danubetech.libsovrin.signus.SignusResults.CreateAndStoreMyDidResult;
 import com.danubetech.libsovrin.signus.SignusResults.DecryptResult;
@@ -160,9 +161,9 @@ public class Signus extends SovrinJava.API {
 
 	public static Future<VerifySignatureResult> verifySignature(
 			Wallet wallet,
+			Pool pool,
 			String did,
-			String msg,
-			String signature) throws SovrinException {
+			String signedMsg) throws SovrinException {
 
 		final CompletableFuture<VerifySignatureResult> future = new CompletableFuture<> ();
 
@@ -179,13 +180,14 @@ public class Signus extends SovrinJava.API {
 		};
 
 		int walletHandle = wallet.getWalletHandle();
+		int poolHandle = pool.getPoolHandle();
 
 		int result = LibSovrin.api.sovrin_verify_signature(
 				FIXED_COMMAND_HANDLE, 
 				walletHandle, 
+				poolHandle,
 				did,
-				msg,
-				signature,
+				signedMsg,
 				callback);
 
 		checkResult(result);

@@ -53,7 +53,7 @@ public abstract class LibSovrin {
 		public int sovrin_replace_keys(int command_handle, int wallet_handle, String did, String identity_json, Callback cb);
 		public int sovrin_store_their_did(int command_handle, int wallet_handle, String identity_json, Callback cb);
 		public int sovrin_sign(int command_handle, int wallet_handle, String did, String msg, Callback cb);
-		public int sovrin_verify_signature(int command_handle, int wallet_handle, String did, String msg, String signature, Callback cb);
+		public int sovrin_verify_signature(int command_handle, int wallet_handle, int pool_handle, String did, String signed_msg, Callback cb);
 		public int sovrin_encrypt(int command_handle, int wallet_handle, String did, String msg, Callback cb);
 		public int sovrin_decrypt(int command_handle, int wallet_handle, String did, String encrypted_msg, Callback cb);
 
