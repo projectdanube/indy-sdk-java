@@ -63,7 +63,7 @@ public abstract class LibSovrin {
 		public int sovrin_issuer_create_and_store_revoc_reg(int command_handle, int wallet_handle, int claim_def_seq_no, int max_claim_num, Callback cb);
 		public int sovrin_issuer_create_claim(int command_handle, int wallet_handle, String claim_req_json, String claim_json, int revoc_reg_seq_no, int user_revoc_index, Callback cb);
 		public int sovrin_issuer_revoke_claim(int command_handle, int wallet_handle, int claim_def_seq_no, int revoc_reg_seq_no, int user_revoc_index, Callback cb);
-    	public int sovrin_prover_store_claim_offer(int command_handle, int wallet_handle, String claim_offer_json, Callback cb);
+		public int sovrin_prover_store_claim_offer(int command_handle, int wallet_handle, String claim_offer_json, Callback cb);
 		public int sovrin_prover_get_claim_offers(int command_handle, int wallet_handle, String filter_json, Callback cb);
 		public int sovrin_prover_create_master_secret(int command_handle, int wallet_handle, String master_secret_name, Callback cb);
 		public int sovrin_prover_create_and_store_claim_req(int command_handle, int wallet_handle, String prover_did, String claim_offer_json, String claim_def_json, String master_secret_name, Callback cb);
@@ -85,7 +85,6 @@ public abstract class LibSovrin {
 		try {
 
 			init();
-
 		} catch (UnsatisfiedLinkError ex) {
 
 			// Library could not be found in standard OS locations.
