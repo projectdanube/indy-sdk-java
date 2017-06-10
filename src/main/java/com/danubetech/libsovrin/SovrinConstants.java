@@ -2,8 +2,8 @@ package com.danubetech.libsovrin;
 
 public class SovrinConstants {
 
-	public static final String ROLE_TRUSTEE = "0";
-	public static final String ROLE_STEWARD = "2";
+	public static final String ROLE_TRUSTEE = "TRUSTEE";
+	public static final String ROLE_STEWARD = "STEWARD";
 
 	public static final String OP_NODE = "0";
 	public static final String OP_NYM = "1";
