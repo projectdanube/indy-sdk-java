@@ -136,8 +136,7 @@ public class Ledger extends SovrinJava.API {
 			String submitterDid,
 			String targetDid,
 			String verkey,
-			String xref,
-			String data,
+			String alias,
 			String role) throws SovrinException {
 
 		final CompletableFuture<BuildNymRequestResult> future = new CompletableFuture<> ();
@@ -159,8 +158,7 @@ public class Ledger extends SovrinJava.API {
 				submitterDid,
 				targetDid,
 				verkey,
-				xref,
-				data,
+				alias,
 				role,
 				callback);
 
